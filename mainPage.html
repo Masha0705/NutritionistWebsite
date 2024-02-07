@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нутриціолог | Головна сторінка</title>
+    <link rel="stylesheet" href="style.css">
+   <script src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic" rel="stylesheet" />
+</head>
+
+<body>
+
+<!--Контейнер для хедера+перший блок сайту-->
+<div class="container  body_container">
+    <div id="main">
+        <header class="header">
+            <div class="header-content">
+              <div class="menu-wrapper">
+                <div class="burger-button">&#9776;</div>
+                <nav class="menu">
+                  <ul>
+                    <li><a href="#main">Головна</a></li>
+                    <li><a href="#aboutme">Про мене</a></li>
+                    <li class="submenu-toggle" id="services-toggle"><a href="#services">Послуги</a></li>
+                    <ul class="submenu">
+                      <li><a href="#service1">Індивідуальна консультація</a></li>
+                      <li><a href="#service2">Створення персональних дієт</a></li>
+                      <li><a href="#service3">Програма контролю ваги</a></li>
+                      <li><a href="#service4">Консультації з харчовими звичками</a></li>
+                    </ul>
+                    <li><a href="#contacts">Контакти</a></li>
+                    <li><a href="#reviews">Відгуки</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <label for="toggleSidebar" class="button-nocolor">ЗАМОВИТИ КОНСУЛЬТАЦІЮ</label>
+            </div>
+          </header>
+          
+    
+    
+    <!-- Бокова панель  -->
+    <input type="checkbox" id="toggleSidebar" class="toggle">
+    <div class="sidebar">
+        <label for="toggleSidebar" class="close-button">ЗАКРИТИ</label>
+        <form>
+            <div class="container-sidebar-form">
+            <label class="field-label" for="name-sidebar">Ім'я</label>
+            <input type="text" id="name" name="name" required>
+
+            <label class="field-label" for="surname-sidebar">Прізвище</label>
+            <input type="text" id="surname" name="surname" required>
+
+            <label class="field-label" for="comment-sidebar">Коментар</label>
+            <input type="text" name="comment" required>
+            
+            <label class="field-label" for="phone-sidebar">Номер телефону</label>
+            <input type="tel" id="phone" name="phone" required>
+            
+            <label class="field-label" for="email-sidebar">Електронна пошта</label>
+            <input type="email" id="email" name="email" required>
+            
+        </div>
+        <button class="button-sidebar" onclick="return validateForm()">ЗАПИСАТИСЯ</button>
+        </form>
+    </div>
+</div>
+    
+
+<!--Контейнер для першого блоку-->
+    <div class="container-first-section">
+        <div class="container-title">
+        <h2 class="nutritionist">нутриціолог</h2>
+        <h1 class="name">ОЛЕНА </h1>
+        <h1 class="surname">КУЗЬМЕНКО </h1>
+    </div>
+    <!--Контейнер для лівого тексту першого блоку-->
+    <div class="container-description">
+    <div class="container-description-text">
+        <p class="description1">визнанний експерт<br>у галузі нутриціології</p>
+        <p class="description2">з багаторічним досвідом</p>
+        <div class="image-line"><img src="images/line.png" alt=""></div>
+        <button class="button-color" id="openCustomCalculatorButton">РОЗРАХУВАТИ ДОБОВУ НОРМУ КАЛОРІЙ</button>
+    </div>
+    <!--Контейнер для зображення справа для першого блоку-->
+    <div class="container-description-image-Olena">
+    <div class="image-Olena"><img src="images/Olena.png" alt=""></div>
+    </div>
+    </div>
+</div>
+
+ <!--Модальне вікно - розрахунок добової норми калорій-->
+<div id="customCalculatorModal" class="custom-modal">
+  <span class="close-button" onclick="closeCustomModal()">✖</span>
+  <h class="header-calculate-kal">РОЗРАХУНОК ДОБОВОЇ НОРМИ КАЛОРІЙ</h2>
+  <form id="customCalculator-form">
+      <label for="customWeight">Вага (кг):</label>
+      <input type="number" id="customWeight" required>
+      
+      <label for="customHeight">Зріст (см):</label>
+      <input type="number" id="customHeight" required>
+      
+      <label for="customAge">Вік:</label>
+      <input type="number" id="customAge" required>
+      
+      <label for="customActivity">Рівень активності:</label>
+      <select id="customActivity" required>
+          <option value="1.2">Мінімальна активність</option>
+          <option value="1.375">Низька активність</option>
+          <option value="1.55">Середня активність</option>
+          <option value="1.725">Висока активність</option>
+          <option value="1.9">Дуже висока активність</option>
+      </select>
+      
+      <button type="button" class="calculate-button" onclick="calculateCustomBMR()">Розрахувати</button>
+  </form>
+  <div id="customResult"></div>
+</div>
+
+<!-- Затемнення фона для модального вікна -->
+<div id="customOverlay" class="custom-overlay"></div>
+
+<!-- Розрахунки для модального вікна калорій -->
+<script>
+     // Обробник подій дя кнопки
+     document.getElementById("openCustomCalculatorButton").addEventListener("click", function() {
+        openCustomModal();
+    });
+
+
+    function openCustomModal() {
+        document.getElementById("customCalculatorModal").style.display = "block";
+        document.getElementById("customOverlay").style.display = "block";
+    }
+
+    function closeCustomModal() {
+        document.getElementById("customCalculatorModal").style.display = "none";
+        document.getElementById("customOverlay").style.display = "none";
+    }
+
+    function closeCustomModal() {
+        // Очищаємо значення полів форми при закритті вікна
+        document.getElementById("customWeight").value = "";
+        document.getElementById("customHeight").value = "";
+        document.getElementById("customAge").value = "";
+        document.getElementById("customActivity").value = "";
+
+        document.getElementById("customCalculatorModal").style.display = "none";
+        document.getElementById("customOverlay").style.display = "none";
+    }
+
+    function calculateCustomBMR() {
+        // Отримуємо значення з полів форми
+        var weight = parseFloat(document.getElementById("customWeight").value);
+        var height = parseFloat(document.getElementById("customHeight").value);
+        var age = parseFloat(document.getElementById("customAge").value);
+        var activity = parseFloat(document.getElementById("customActivity").value);
+
+        // Розраховуємо базовий метаболізм (BMR) за формулою Харіса-Бенедикта
+        var bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+
+        // Множимо BMR на коефіцієнт активності 
+        var calorieIntake = bmr * activity;
+
+        // Виводимо результат прорахунків
+        var resultElement = document.getElementById("customResult");
+        resultElement.innerHTML = "Ваша добова норма калорій: " + calorieIntake.toFixed(2) + " ккал";
+    }
+</script>
+
+
+<!--Контейнер для другого блоку-->
+    <div class="container-second-section">
+        <div id="aboutme">
+    <!--Контейнер для заголовку другого блоку-->
+        <div class="container-title2">
+        <h2 class="blocktitle1">ЧОМУ ВАРТО </h2>
+        <div class="waveline"><img src="images/wave-line.png" alt=""></div>
+        </div>
+        <h2 class="blocktitle2">ЗВЕРНУТИСЯ ДО МЕНЕ? </h2>
+        
+        <!--Контейнер для карточок другого блоку-->
+        <div class="container-items">
+           <!--Контейнер для перших трьох карточок другого блоку-->
+           <div class="container-items1">
+                <h3 class="text-item1">Олена Кузьменко<br>заслужено належить до<br> числа провідних фахівців,<br> присвятивших своє життя<br> 
+                дослідженню впливу<br> харчування на загальний <br>стан здоров'я та добробуту <br>людей. </h3>
+                <h3 class="text-item2">Доктор Олена пропагує <br>індивідуальний підхід до<br> кожного клієнта,<br> орієнтуючись на його<br>особисті потреби та мету.</h3>
+                <div class="photokiwi"><img src="images/photo1.jpg" alt=""></div>
+            </div>
+        </div>
+            <div class="container-items2">
+                <h3 class="text-item3">Її метою є покращення <br>вашого здоров'я, <br>збалансоване харчування<br> та досягнення оптимальної<br> 
+                    ваги без жорстких <br>обмежень або відчуття<br> голоду.</h3>
+                <div class="photoavocado"><img src="images/photo2.jpg" alt=""></div>
+                <h3 class="text-item4">Працюючи з Доктором <br>Оленою, ви можете<br> розраховувати на науково <br>обґрунтовані,
+                     ефективні та <br>реалістичні рекомендації<br> щодо харчування. </h3>
+
+
+        </div>
+    </div>
+</div>
+
+    <!--Контейнер для третього блоку-->
+    <div class="container-third-section">
+        <div class="container-title3">
+            <h2 class="blocktitle3">ПОСЛУГИ ТА ЦІНИ </h2>
+            <div class="waveline"><img src="images/wave-line.png" alt=""></div>
+            </div>
+
+    <!--Контейнер для послуг-->
+    <!--послуга 1-->
+    <div id="service1">
+    <div class="container-services">
+        <div id="individual-consultation">
+         <div class="container-services-name">
+        <h3 class="service-name1">/ІНДИВІДУАЛЬНА КОНСУЛЬТАЦІЯ</h3>
+    </div>
+           <div class="container-services-price-button">
+           <h4 class="service-time">60 хвилин</h4>
+           <h4 class="service-price">1000 грн</h4>
+           <button class="button-services">ЗАПИСАТИСЯ</button>
+           </div>
+        </div> 
+
+        <div class="container-services-description">
+        <h4 class="services-description1">Нутриціолог надає можливість записатися на особисту<br>консультацію, під час якої вони проведуть
+             детальний<br>аналіз вашого харчування, оцінять ваші потреби та<br>мети, і розроблять індивідуальний план харчування,<br>
+              що відповідає вашим потребам. </h4>
+        
+        </div> 
+    </div>
+</div>
+
+    <!--послуга 2-->
+    <div id="service2">
+    <div class="container-services">
+        <div id="personal-diet">
+        <div class="container-services-name">
+       <h3 class="service-name1">/СТВОРЕННЯ ПЕРСОНАЛЬНИХ ДІЄТ</h3>
+    </div>
+          <div class="container-services-price-button">
+          <h4 class="service-time">4 тижні</h4>
+          <h4 class="service-price">3500 грн</h4>
+          <button class="button-services">ЗАПИСАТИСЯ</button>
+          </div>
+       </div> 
+
+       <div class="container-services-description">
+       <h4 class="services-description1">Нутриціолог може розробити персоналізовану дієту,<br> враховуючи ваші уподобання,
+         медичні обмеження та цілі<br> здоров'я. Вони складуть детальний план харчування,<br> який допоможе вам досягти 
+         оптимального здоров'я<br> та підтримувати необхідний рівень енергії.  </h4>
+       
+       </div> 
+   </div>
+</div>
+
+
+
+    <!--послуга 3-->
+    <div id="service3">
+    <div class="container-services">
+        <div id="weight-control">
+        <div class="container-services-name">
+       <h3 class="service-name1">/ПРОГРАМА КОНТРОЛЮ ВАГИ</h3>
+    </div>
+          <div class="container-services-price-button">
+          <h4 class="service-time">4 тижні</h4>
+          <h4 class="service-price">2750 грн</h4>
+          <button class="button-services">ЗАПИСАТИСЯ</button>
+          </div>
+       </div> 
+       <div class="container-services-description">
+       <h4 class="services-description1">Нутриціолог може надати послуги з контролю ваги,<br> допомогти вам розробити збалансовану дієту 
+        з<br> метою збільшення або зниження маси тіла.<br> Вони надають індивідуальні рекомендації щодо<br> кількості калорій,складу продуктів
+        та оптимального <br>тренувального режиму. </h4>
+       </div> 
+   </div>
+</div>
+
+
+   <!--послуга 4-->
+   <div id="service4">
+   <div class="container-services">
+    <div id="consultation-on-eating-habits">
+    <div class="container-services-name">
+   <h3 class="service-name1">/КОНСУЛЬТАЦІЇ З ХАРЧОВИМИ ЗВИЧКАМИ</h3>
+</div>
+      <div class="container-services-price-button">
+      <h4 class="service-time">4 тижні</h4>
+      <h4 class="service-price">3550 грн</h4>
+      <button class="button-services">ЗАПИСАТИСЯ</button>
+      </div>
+   </div> 
+
+   <div class="container-services-description">
+   <h4 class="services-description1">Нутриціологічні консультації з харчовими <br>звичками - це послуга, яка спрямована на досягнення<br>
+    оптимального здоров'я та благополуччя шляхом<br> поліпшення харчування та харчових звичок клієнта.<br> Нутриціолог, як професіонал у 
+    галузі харчових наук,<br> надає клієнтові індивідуальні рекомендації<br>та поради з їжі </h4>
+   </div> 
+   </div>
+    </div>
+</div>
+
+<!--  модальне вікно з формою -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+   
+    <div id="modalContent"></div>
+    <!-- Форма з валідацією -->
+    <form id="modalForm" onsubmit="return validateForm()">
+      <label for="modal_name">Ім'я</label>
+      <input type="text" id="modal_name" name="modal_name" required>
+      <br>
+      <label for="modal_email">Email</label>
+      <input type="email" id="modal_email" name="modal_email" required>
+      <br>
+      <label for="modal_phone-sidebar">Номер телефону</label>
+      <input type="phone" id="modal_phone" name="modal_phone" required>
+      <br>
+      <label for="modal_comment-sidebar">Коментар</label>
+      <input type="text" id="modal_comment" name="modal_comment" required>
+      <br>
+      <button type="submit">Відправити</button>
+    </form>
+
+  </div>
+</div>
+
+
+
+
+  <!-- Слайдер -->
+
+<div class="container-slider">
+     <div id="reviews">
+    <div class="container-title-slider">
+        <h2 class="blocktitleslider">ВІДГУКИ </h2>
+        <div class="waveline"><img src="images/wave-line.png" alt=""></div>
+    </div>
+<!-- Основний блок слайдера -->
+<div class="slider">
+
+  <!-- Перший слайд -->
+  <div class="item">
+    <img src="images/review1.jpg">
+  </div>
+
+  <!-- Другий слайд -->
+  <div class="item">
+    <img src="images/review2.jpg">
+  </div>
+
+  <!-- Третій слайд -->
+  <div class="item">
+    <img src="images/review3.jpg">
+  </div>
+
+  <!-- Кнопки-стрілки -->
+  <a class="previous" onclick="previousSlide()">&#10094;</a>
+  <a class="next" onclick="nextSlide()">&#10095;</a>
+</div>
+</div>
+</div>
+
+<div id="contacts">
+    <footer class="footer">
+        
+        <!-- Колонка 1: Інформація про автора -->
+        <div class="container-footer-column">
+        <div class="footer-column">
+            <h4 class="name-nutritionist-footer">ОЛЕНА</h4>
+            <h4 class="surname-nutritionist-footer">КУЗЬМЕНКО</h4>
+            <h4 class="text-nutritionist-footer">нутриціолог</h4>
+            <h4 class="made-by-footer">Made by Mariia Chorna</h4>
+        </div>
+    </div>
+        <!-- Колонка 2: Навігація -->
+        <div class="footer-column">
+            <h4 class="footer-header-list">НАВІГАЦІЯ</h4>
+            <ul>
+                <li><a href="#main">Головна</a></li>
+                <li><a href="#aboutme">Про мене</a></li>
+                <li><a href="#services">Послуги</a></li>
+                <li><a href="#reviews">Відгуки</a></li>
+                <li><a href="#contacts">Контакти</a></li>
+            </ul>
+        </div>
+        
+        <!-- Колонка 3: Варіанти послуг -->
+        <div class="footer-column">
+            <h4 class="footer-header-list">ВАРІАНТИ ПОСЛУГ</h4>
+            <ul>
+                <li><a href="#individual-consultation">Індивідуальна консультація</a></li>
+                <li><a href="#personal-diet">Створення персональних дієт</a></li>
+                <li><a href="#weight-control">Контроль ваги</a></li>
+                <li><a href="#consultation-on-eating-habits">Консультації з харчовими звичками</a></li>
+            </ul>
+        </div>
+        
+        <!-- Колонка 4: Контакти -->
+        <div class="footer-column">
+            <h4 class="footer-header-list">КОНТАКТИ</h4>
+            <p class="text-contacts">olenakuzmenko@gmail.com</p>
+            <p class="text-contacts">+380665678996</p>
+        </div>
+    </footer>
+    </div>
+</div>
+
+
+ <!-- Меню -->
+<script>
+    // Получите ссылку на элемент кнопки и меню
+    const burgerButton = document.querySelector('.burger-button'); // Найти кнопку "бургер"
+    const menu = document.querySelector('.menu'); // Найти меню
+
+    // Добавьте обработчик события клика на кнопку
+    burgerButton.addEventListener('click', () => { // Добавить обработчик клика
+      // Переключите класс для меню, чтобы открыть или закрыть его
+      menu.classList.toggle('open'); // Переключить класс "open" в меню
+    });
+</script>
+
+ <!-- Підменю -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      var servicesToggle = document.getElementById("services-toggle"); // Найти кнопку "services-toggle"
+      var submenu = servicesToggle.nextElementSibling; // Найти следующий элемент после кнопки (подменю)
+
+      var isSubmenuOpen = false; // Флаг, показывающий, открыто ли подменю
+
+      servicesToggle.addEventListener("click", function (event) {
+          event.stopPropagation(); // Остановить всплытие события клика
+          if (isSubmenuOpen) {
+              submenu.style.display = "none"; // Закрыть подменю
+          } else {
+              submenu.style.display = "block"; // Открыть подменю
+          }
+          isSubmenuOpen = !isSubmenuOpen; // Инвертировать флаг (изменить на false)
+      });
+
+      // Закрывать подменю при клике на любое место на странице
+      document.addEventListener("click", function () {
+          submenu.style.display = "none"; // Закрыть подменю
+          isSubmenuOpen = false; // Установить флаг в false
+      });
+
+      // Остановить распространение кликов в подменю
+      submenu.addEventListener("click", function (event) {
+          event.stopPropagation(); // Остановить всплытие события клика
+      });
+  });
+</script>
+
+
+ <!-- Слайдер -->
+<script>
+    /* Встановлюємо стартовий індекс слайду за замовчуванням: */
+let slideIndex = 1;
+/* Викликаємо функцію, яка реалізована нижче: */
+showSlides(slideIndex);
+
+/* Збільшуємо індекс на 1 - показуємо наступний слайд: */
+function nextSlide() {
+    showSlides(slideIndex += 1);
+}
+
+/* Зменшуємо індекс на 1 – показуємо попередній слайд: */
+function previousSlide() {
+    showSlides(slideIndex -= 1);  
+}
+
+/* Встановлюємо поточний слайд: */
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+/* Функція перегортання: */
+function showSlides(n) {
+/* Звертаємось до елементів з назвою класу "item", тобто до картинок: */
+    let slides = document.getElementsByClassName("item");
+    
+/* Перевіряємо кількість слайдів: */
+    if (n > slides.length) {
+      slideIndex = 1
+    }
+    if (n < 1) {
+        slideIndex = slides.length
+    }
+  
+/* Проходимо по кожному слайду в циклі for: */
+    for (let slide of slides) {
+        slide.style.display = "none";
+    }
+    slides[slideIndex - 1].style.display = "block";    
+}
+
+</script>
+
+
+ <!-- Валідація форми в сайдбарі -->
+<script>
+    // Функція для валідації імені
+    function validateName() {
+      var nameField = document.getElementById("name"); // Отримуємо посилання на поле "Ім'я" за його ідентифікатором
+      var name = nameField.value; // Отримуємо значення, яке користувач ввів у поле "Ім'я"
+      var namePattern = /^[А-Яа-яЁёA-Za-zіїєґІЇЄҐ' -]{3,}$/; // Регулярний вираз для перевірки формату імені (мінімум 3 літери)
+
+      if (!namePattern.test(name)) { // Перевірка, чи введене ім'я відповідає регулярному виразу
+        alert("Неправильний формат імені"); // Виводиться повідомлення про помилку
+        return false; // Повертається false, щоб заборонити відправку форми
+      }
+
+      return true; // Якщо ім'я валідне, повертається true
+    }
+
+    // Функція для валідації прізвища
+    function validateSurname() {
+      var surnameField = document.getElementById("surname"); 
+      var surname = surnameField.value; 
+      var surnamePattern = /^[А-Яа-яЁёA-Za-zіїєґІЇЄҐ' -]{3,}$/; 
+
+      if (!surnamePattern.test(surname)) { 
+        alert("Неправильний формат прізвища"); 
+        return false; 
+      }
+
+      return true; 
+    }
+
+    // Функція для валідації номеру телефону
+    function validatePhone() {
+      var phoneField = document.getElementById("phone"); 
+      var phone = phoneField.value; 
+      var phonePattern = /^\+38\d{10}$/; // Регулярний вираз для перевірки формату номеру телефону ( номер України)
+
+      if (!phonePattern.test(phone)) { // Перевірка, чи введений номер телефону відповідає регулярному виразу
+        alert("Неправильний формат номеру телефону"); // Виводиться повідомлення про помилку
+        return false; // Повертається false, щоб заборонити відправку форми
+      }
+
+      return true; 
+    }
+
+    // Функція для валідації електронної пошти
+    function validateEmail() {
+      var emailField = document.getElementById("email"); // Отримуємо посилання на поле "Електронна пошта" за його ідентифікатором
+      var email = emailField.value; // Отримуємо значення, яке користувач ввів у поле "Електронна пошта"
+      var emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/; // Регулярний вираз для перевірки формату електронної пошти
+
+      if (!emailPattern.test(email)) { // Перевірка, чи введена електронна пошта відповідає регулярному виразу
+        alert("Неправильний формат електронної пошти"); // Виводиться повідомлення про помилку
+        return false; // Повертається false, щоб заборонити відправку форми
+      }
+
+      return true; 
+    }
+
+    // Функція для валідації всіх полів перед відправкою форми
+    function validateForm() {
+      return validateName() && validateSurname() && validatePhone() && validateEmail(); // Перевірка всіх полів
+    }
+</script>
+
+
+ <!-- Анімація кнопок на сайті -->
+<script>
+  // Отримуємо всі кнопки з класами .button-services, .button-color, .button-nocolor
+const buttons = document.querySelectorAll('.button-services, .button-color, .button-nocolor');
+
+// Для кожної кнопки встановлюємо обробники подій
+buttons.forEach(button => {
+  // Додаємо обробник події при наведенні курсора на кнопку
+  button.addEventListener('mouseover', function(e) {
+    // Змінюємо стилі при наведенні
+    button.style.transform = 'scale(1.1)';
+    button.style.backgroundColor = '#3c8c3f';
+    button.style.boxShadow = '0 0 20px 0 rgba(0, 0, 0, 0.3)';
+    button.style.color = '#fff';
+  });
+
+  // Додаємо обробник події при знятті курсора з кнопки
+  button.addEventListener('mouseout', function(e) {
+    // Повертаємо вихідні стилі при знятті курсора
+    button.style.transform = 'scale(1)';
+    button.style.backgroundColor = '#386641';
+    button.style.boxShadow = '0 0 10px 0 rgba(0, 0, 0, 0.2)';
+    button.style.color = '#fff';
+  });
+});
+
+</script>
+
+
+<!--Модальне вікно, яке відкривається при натисканні на кнопку "Записатися" біля послуг -->
+
+<script>
+  // Отримайте посилання на всі кнопки "ЗАПИСАТИСЯ" з класом button-services
+  var buttonServices = document.getElementsByClassName("button-services");
+
+  // Отримайте посилання на модальне вікно
+  var modal = document.getElementById("myModal");
+
+  // Отримайте посилання на елемент закриття модального вікна
+  var span = document.getElementsByClassName("close")[0];
+
+  // Натискання на кнопку відкриває модальне вікно
+  Array.from(buttonServices).forEach(function (button, index) {
+    button.onclick = function () {
+      openModal(index + 1);
+    };
+  });
+
+  // Натискання на "x" закриває модальне вікно
+  span.onclick = function () {
+    closeModal();
+  };
+
+  // Натискання за межами модального вікна також закриває його
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      closeModal();
+    }
+  };
+
+  // Відкриття модального вікна за номером послуги
+  function openModal(serviceNumber) {
+    var modalContent = document.getElementById("modalContent");
+    modalContent.innerHTML = getServiceContent(serviceNumber);
+    modal.style.display = "block";
+  }
+
+  // Закриття модального вікна
+  function closeModal() {
+    modal.style.display = "none";
+  }
+  
+
+  // Отримання вмісту для модального вікна 
+  function getServiceContent(serviceNumber) {
+    var content = "";
+    var serviceName = document.getElementById("service" + serviceNumber).querySelector(".service-name1").innerText;
+    // код для отримання вмісту за номером послуги
+  
+    content += "<h2>Послуга " +serviceNumber + serviceName + "</h2>";
+    return content;
+  }
+
+
+  function validateForm() {
+  var name = document.getElementById("modal_name").value;
+  var email = document.getElementById("modal_email").value;
+  var phone = document.getElementById("modal_phone").value;
+  var comment = document.getElementById("modal_comment").value;
+
+  if (name.trim() === "" || email.trim() === "" || phone.trim() === "" || comment.trim() === "") {
+    alert("Будь ласка, заповніть всі поля.");
+    return false; // Відмовити від відправки форми
+  }
+
+  // Валідація електронної пошти
+  var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    alert("Введіть коректну електронну пошту.");
+    return false;
+  }
+
+  // Валідація номера телефону
+  var phoneRegex = /^\d{10}$/; // Перевірка на 10 цифр 
+  if (!phoneRegex.test(phone)) {
+    alert("Введіть коректний номер телефону.");
+    return false;
+  }
+
+  // Якщо валідація пройшла успішно, ви можете відправити форму.
+  return true;
+}
+</script>
+
+
+
+</body>
+</html>

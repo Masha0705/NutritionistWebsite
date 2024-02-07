@@ -1,0 +1,1010 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    background-color: #FFFCF3;
+}
+
+/* Стилі для загального хедера */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+.container.body_container{
+margin-left: 150px;
+margin-right: 150px;
+display: flex;
+flex-direction: column; /* Столбцовая ориентация на мобильных устройствах */
+align-items: center; /* Выравнивание элементов по центру по горизонтали */
+text-align: center; /* Выравнивание текста по центру по горизонтали */
+}
+
+/* Стилі для хедера, без додавання бургер меню */
+/*.menu{
+    flex: 1;
+}
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu li {
+    margin-right: 50px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #000;
+    font-family: Roboto;
+}
+
+.menu li a:hover {
+    color: #6A994E; /* Меняем цвет текста при наведении */
+ /* } */
+
+
+ /* Стилі для хедера,  бургер меню */
+
+ /* Скрытое меню */
+
+
+.menu {
+    display: none;
+    background-color: #386641;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    text-align: center;
+  }
+  .menu-wrapper {
+    display: flex;
+  align-items: center;
+  justify-content: center; 
+   
+  }
+  
+  .menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu ul li {
+    padding: 10px 0;
+  }
+  
+  .menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: Roboto;
+  }
+
+  .menu li a:hover {
+    color: #6A994E; /* Меняем цвет текста при наведении */
+  }
+  
+  /* Отображение меню при активации */
+  .menu.open {
+    display: block;
+  }
+
+
+
+/* Стилі для пунктів меню */
+.submenu {
+    display: none;
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    background-color: #3c8c3f;
+
+}
+
+.submenu li {
+    padding: 10px;
+}
+
+/* Підменю буде відображатися при наведенні на "Послуги" */
+.submenu-toggle:hover + .submenu {
+    display: block;
+}
+
+  /* Стили для бургер-кнопки */
+  .burger-button {
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    margin-right: 50%;
+    z-index: 2;
+  }
+  
+/* Стилі для кнопки в хедері */
+.button-nocolor {
+    display: inline-flex;
+    padding: 14px 31px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 80px;
+    background: #386641;
+    color: #fff; /* Цвет текста кнопки */
+    transition: background-color 0.3s, color 0.3s; 
+    
+   
+}
+ 
+
+
+/* Стилі для сайдбару */
+/* Стилі для бокової панелі */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Початкове зміщення за межами видимості */
+    width: 300px;
+    height: 100%;
+    background-color: #6A994E;
+    box-shadow: -1px 0 3px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    z-index: 1000; /* Щоб була поверх іншого контенту */
+    text-align: left;
+}
+
+/* Стилі для полів форми в сайдбарі */
+.sidebar input[type="name"],
+.sidebar input[type="surname"],
+.sidebar input[type="text"],
+.sidebar input[type="tel"],
+.sidebar input[type="email"] {
+    padding: 10px;
+    border-radius: 30px; /* Заокруглення полів форми */
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    width: 90%;
+}
+.container-sidebar-form{
+    margin: 30px;
+}
+.field-label{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    font-family:Roboto;
+    color: #fff;
+}
+
+.close-button {
+    background-color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 200px;
+    border-radius: 80px;
+    font-family: Roboto;
+    font-weight: 400;
+}
+
+.button-sidebar{
+    display: flex;
+    padding: 14px 31px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 80px;
+    background: #fff; 
+    color: #6A994E; 
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 40px;
+    border: none;
+}
+
+.button-sidebar:hover {
+    background: #c5c6c4; 
+    color: #6A994E; 
+    border: none; 
+}
+
+
+
+/* При наведенні на кнопку "ЗАМОВИТИ КОНСУЛЬТАЦІЮ", відображаємо бокову панель */
+.button-nocolor:hover + .sidebar {
+    right: 0;
+}
+
+/* Стилі для відображення/приховування бокової панелі */
+.toggle {
+    display: none;
+}
+
+.toggle:checked + .sidebar {
+    right: 0;
+}
+
+
+
+
+/* Головний блок */
+/* Стилі для тексту першого блоку */
+.nutritionist {
+    font-size: 35px;
+    font-style: light;
+    font-weight: 300;
+    align-items: center;
+    margin-top: 80px;
+    font-family:Roboto;
+}
+
+.name{
+    font-family: Roboto;
+    font-size: 80px;
+    font-style: normal;
+}
+
+.surname{
+    font-family: Roboto;
+    font-size: 80px;
+    font-style: italic;
+    color: #386641;
+
+}
+.name, .surname{
+    display: inline;
+    align-items: center;
+    
+}
+
+.container-description{
+    display: flex;
+    text-align: left;
+}
+
+.description1{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    font-family:Roboto;
+    margin-top: 32px;
+}
+
+.description2{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-family:Roboto;
+    color: #6A994E;
+    margin: 7px 0 0 60px ;
+}
+
+/* Стилі для головної кнопки першого блоку */
+.button-color {
+    display: flex;
+    padding: 14px 31px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 80px;
+    border: 1px solid #386641; 
+    background: #386641; 
+    color: #FFF; 
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 80px;
+}
+
+.button-color:hover {
+    background: #3c8c3f; 
+    color: #FFF; 
+    border-color: none; 
+}
+
+/* Стилі для зображень */
+.image-line{
+    width: 40px;
+    height: 40px;
+    margin-left:140px ;
+}
+
+.image-Olena{
+    width: 30px;
+    height: 30px;
+    flex: 1;
+    text-align: center;
+    margin-left: 80px;
+ 
+}
+
+/* Стилі для другого блоку */
+/* Заголовок другого блоку */
+.container-title2{
+    margin: 160px 150px 0 250px;
+    display: flex;
+    flex-direction: row;
+    
+
+}
+.blocktitle1{
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 500;
+    font-family:Roboto;
+    padding-left: -10%;
+}
+
+.blocktitle2{
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 500;
+    font-family:Roboto;
+    color: #386641;
+    margin-left: 400px;
+    
+}
+
+/* Карточки */
+
+.container-items{
+    display: inline; 
+    padding: 35px;
+}
+
+.container-items1,
+.container-items2{
+    display: flex; 
+    justify-content: space-around;
+    padding: 20px 0 0 30px;
+    align-items: center;
+    
+}
+
+.text-item1,
+.text-item2,
+.text-item3,
+.text-item4{
+    display: inline-flex;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: justify;
+    border-radius: 30px;
+    border: 1px solid  #386641;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    font-family:Roboto;    
+    transition: all 0.3s ease;
+}
+
+.text-item1:hover{
+    background: #386641; /* Новый цвет фона при наведении */
+    color: #FBF5E6; /* Новый цвет текста при наведении */
+    border-color: none;
+}
+.text-item2:hover{
+    background: #386641; /* Новый цвет фона при наведении */
+    color: #FBF5E6; /* Новый цвет текста при наведении */
+    border-color: none;
+}
+.text-item3:hover{
+    background: #386641; /* Новый цвет фона при наведении */
+    color: #FBF5E6; /* Новый цвет текста при наведении */
+    border-color: none;
+}
+.text-item4:hover{
+    background: #386641; /* Новый цвет фона при наведении */
+    color: #FBF5E6; /* Новый цвет текста при наведении */
+    border-color: none;
+}
+
+
+
+/* Стилі для третього блоку */
+.container-title3{
+    margin: 5% 5% 0 10%;
+    display: flex;
+    justify-content: space-between;
+}
+.blocktitle3{
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 500;
+    font-family:Roboto; 
+    white-space: nowrap; 
+}
+.waveline {
+    margin-left: 10px; /* Отступ между заголовком и линией  */
+    
+}
+
+.container-services{
+    margin: 50px 60px 50px 60px;
+    display: flex; 
+  justify-content: space-between;
+    padding: 40px 0 40px 0;
+    align-items: center;
+    border-radius: 30px;
+    border: 1px solid  #386641;
+    
+}
+
+.service-name1{
+    margin-left: 80px;
+    text-align: left;
+font-size: 20px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+font-family:Roboto; 
+color: #386641;
+}
+
+.service-time{
+    margin-left: 80px;
+    text-align: left;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-family:Roboto; 
+    margin-top: 8px; 
+}
+.service-price{
+    margin-left: 80px;
+    text-align: left;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #386641; 
+    font-family:Roboto;
+    margin-top: 8px; 
+}
+
+
+.button-services{
+    margin-left: 80px;
+    display: flex;
+    padding: 14px 31px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    border-radius: 80px;
+    border: 1px solid #386641; 
+    background: #386641; 
+    color: #FFF; 
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 15px;
+    
+}
+
+/*
+.button-services:hover {
+    background: #3c8c3f; 
+    color: #FFF; 
+    border-color: none; 
+}*/
+
+.services-description1{
+    margin-right: 80px;
+  text-align: right;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    font-family:Roboto; 
+    
+}
+
+
+/* Стилі для загального контейнера футера */
+
+
+.footer {
+    color: #000; /* Колір тексту */
+    padding: 60px 0; /* Внутрішні відступи вгорі та внизу */
+    display: flex;
+    justify-content: space-between; /* Рівномірно розподіляє колонки */
+}
+
+.container-footer-column{
+    text-align: left;
+}
+
+/* Стилі для кожної окремої колонки */
+.footer-column {
+    flex: 1; /* Кожна колонка займає рівну частину простору */
+    margin: 0 20px; /* Зовнішні відступи між колонками */
+}
+
+.footer ul {
+    list-style: none; /* Прибирає маркери списку */
+    padding: 0; /* Внутрішні відступи для списку */
+}
+
+.footer ul li {
+    margin: 20px 0 10px 0; /* Відступ між пунктами списку */
+
+}
+
+.footer ul li a {
+    text-decoration: none; /* Видаляє підкреслення посилань */
+    color: #000; /* Колір тексту посилань */
+    font-size: 16px; /* Розмір тексту посилань */
+    font-family: Roboto;
+}
+
+.footer li a:hover {
+    color: #6A994E; /* Меняем цвет текста при наведении */
+  }
+.footer-column p:last-child {
+    text-align: left;
+}
+
+.name-nutritionist-footer{
+    font-family: Roboto;
+    font-size: 30px;
+    font-style: normal;
+}
+
+
+.surname-nutritionist-footer{
+    font-family: Roboto;
+    font-size: 30px;
+    font-style: italic;
+    color: #386641;
+    margin-left: 30px;
+}
+
+.text-nutritionist-footer{
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    margin-left: 30px;
+}
+
+.made-by-footer{
+    font-family: Roboto;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    margin-top: 40px;
+}
+
+.footer-header-list{
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    color: #6A994E;
+}
+
+.text-contacts{
+    margin: 20px 0 10px 0;
+    font-size: 16px; 
+    font-family: Roboto;
+}
+
+
+@media screen and (max-width: 768px) {
+
+    .container.body_container {
+        display: flex;
+        flex-direction: column; /* Размещаем блоки в столбик на мобильных устройствах */
+        align-items: center; /* Выравниваем блоки по центру по горизонтали */
+        text-align: center; 
+    }
+    .header {
+        flex-direction: column; /* Размещаем элементы в столбик на мобильных устройствах */
+        align-items: flex-start; /* Выравниваем элементы слева */
+    }
+    .burger-button {
+        justify-content: flex-start; /* Прибиваем меню к левому краю */
+        margin-left: -30%;
+        
+      }
+    .menu ul {
+        flex-direction: column; /* Размещаем пункты меню в столбик */
+        align-items: flex-start; /* Выравниваем пункты меню слева */
+    }
+
+    .menu li {
+        margin-right: 0;
+        margin-bottom: 10px; 
+    }
+   
+    .button-nocolor {
+        margin-top: 10px; /* Добавляем отступ сверху для кнопки */
+        justify-content: left;
+       
+    }
+
+    .container-first-section {
+        display: flex;
+        flex-direction: column; /* Размещаем блоки в столбик на мобильных устройствах */
+        align-items: center; /* Выравниваем блоки по центру по горизонтали */
+        text-align: center; /* Выравниваем текст по центру по горизонтали */
+        
+    }
+
+    .container-description {
+        margin-top: 20px; /* Добавляем отступ сверху между блоками */
+    }
+
+    .nutritionist {
+        font-size: 20px;
+    }
+
+    .name,
+    .surname {
+        font-size: 55px;
+    }
+
+    .description1,
+    .description2 {
+        font-size: 20px;
+    }
+
+    .image-Olena {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Выравнивание по вертикали по центру */
+        height: 100%; /* Занимать всю высоту родительского блока */
+        margin-left: 60px; /* При необходимости задайте отступ слева */
+        margin-right: 60px; /* При необходимости задайте отступ справа */
+    }
+
+    .container-description {
+        flex-direction: column; /* Размещаем элементы в столбик на мобильных устройствах */
+        align-items: center; /* Выравниваем элементы по центру по горизонтали */
+    }
+
+    .container-description-text {
+        order: 1; /* Меняем порядок отображения текста (на вторую строку) */
+        text-align: center;
+    }
+
+    .container-description-image-Olena {
+        margin-top: 20px; /* Добавляем отступ между текстом и изображением */
+        order: 1; /* Меняем порядок отображения изображения (на первую строку) */
+        text-align: center;
+        margin-left: 100px;
+    }
+
+    .container-title2 {
+        margin: 20px 0 20px 0;
+        display: flex;
+        flex-direction: column;
+       
+    }
+    .text-item1, .text-item3{
+        margin-bottom: 20px;
+    }
+    .container-items1,
+    .container-items2 {
+        flex-direction: column; /* Размещаем элементы в столбик на мобильных устройствах */
+        align-items: center; /* Выравниваем элементы по центру */
+        text-align: center; /* Выравниваем текст по центру */
+    }
+
+    .photokiwi,
+    .photoavocado {
+        order: 3; /* Перемещаем фото вниз на мобильных устройствах */
+        margin-top: 20px; /* Добавляем отступ сверху между фото и текстом */
+    }
+
+    .blocktitle1, .blocktitle2, .waveline {
+        font-size: 30px; /* Измените размер шрифта заголовка */
+        text-align: center; /* Выравниваем заголовок по центру */
+        margin: 20px 0; /* Добавляем отступ сверху и снизу для заголовка */
+        flex-direction: column;
+    }
+
+
+    .container-title3 {
+        margin: 5% auto;
+        display: flex;
+        flex-direction: column;
+       
+    }
+
+    .blocktitle3 {
+        font-size: 6vw;
+        margin-top: 20px;
+    }
+.waveline{
+    margin: auto;
+}
+    .container-services {
+        flex-direction: column; /* Располагаем элементы в колонку */
+        align-items: center; /* Выравниваем по центру по горизонтали */
+        text-align: center; /* Выравниваем текст по центру */
+        margin: 30px; /* Уменьшаем отступы в мобильной версии */
+        padding: 50px ; /* Уменьшаем внутренний отступ */
+    }
+
+    .service-name1,
+    .service-time,
+    .service-price,
+    .button-services,
+    .services-description1 {
+        margin: 5px 0; /* Уменьшаем междуэлементные отступы */
+        text-align: center; 
+    }
+    .button-services {
+        margin: auto;
+    }
+    .services-description1{
+        font-size: 14px;
+    }
+    .footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 20px 0; /* Внутренний отступ вокруг контента футера */
+    }
+    .footer-column {
+        margin: 20px 0;
+    }
+  
+}
+
+
+
+/* Слайдер: */
+.blocktitleslider{
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 500;
+    font-family:Roboto;
+}
+.slider{
+    max-width: 100%;
+/* Положення елемента встановлюється щодо його вихідної позиції: */    
+position: relative;
+    /* Центруємо по горизонталі: */
+     margin: auto;
+  
+}
+
+/* Картинка масштабується по відношенню до батьківського елементу: */
+.slider .item img {
+/* Елемент змінює розмір так, щоб заповнити блок та зберегти пропорції: */    
+object-fit: cover;
+    width: 100%;
+   
+}
+
+/* Кнопки назад та вперед: */
+.slider .previous, .slider .next {
+    /* Додає курсору іконку, коли той опиняється над кнопкою: */
+    cursor: pointer;
+    /* Положення елемента задається відносно батьківського контейнера: */
+    position: absolute;
+    bottom: 10px; /* Розташувати знизу */
+    width: auto;
+    padding: 16px;
+    /* Оформлення самих кнопок: */
+    color: white; /* Чорний колір тексту */
+    font-weight: bold;
+    font-size: 16px;
+    /* Плавна поява фону при наведенні курсору: */
+    transition: 0.6s ease;
+    /* Округлення кордонів: */
+    border-radius: 50%; /* Округлити кнопки */
+}
+
+.slider .next {
+    right: 10px;
+    border-radius: 5px;
+}
+
+.slider .previous {
+    left: 10px; /* Розташувати кнопку "Назад" зліва */
+    border-radius: 5px ;
+}
+
+/* При наведенні курсору на кнопки додаємо фон кнопок: */.slider .previous:hover,
+.slider .next:hover,
+.slider .previous:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Анімація слайдів: */
+.slider .item {
+    animation-name: fade;
+    animation-duration: 1s;
+}
+@keyframes fade {
+    /* Встановлюємо та змінюємо ступінь прозорості: */
+    from {
+        opacity: 0.4
+    }
+    to {
+        opacity: 1
+    }
+}
+
+  
+
+  #myModal {
+    display: none; /* Початково приховуємо модальне вікно */
+    position: fixed; /* Фіксована позиція, щоб вікно не прокручувалось разом із сторінкою */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Напівпрозорий фон, щоб підкреслити активність модального вікна */
+    z-index: 9999;
+  }
+  
+  .modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #386641; 
+    padding: 20px;
+    border-radius: 5px;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    color: #fff;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+
+/*Стилі модального вікна при оформленні заявки (стилізація елементів які знаходять всередині модального вікна)*/
+  #modalForm { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #modalForm label {
+    margin-bottom: 10px;
+  }
+
+  #modalForm input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+
+  #modalForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #modalForm button:hover {
+    background-color: #45a049;
+  }
+
+
+  /*Стилі модального вікна калькулятору розрахунку добової норми калорій*/
+  .header-calculate-kal{
+    font-family: roboto;
+    color: #FFF;
+    font-weight: 500;
+  }
+  .custom-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #386641;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 400px; 
+    max-width: 90%;
+    box-sizing: border-box;
+
+}
+
+/* Затемнение фона для нового модального окна */
+.custom-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Стили для кнопки закрытия формы */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+ /* Стилі для кнопки розрахунку */
+ .calculate-button {
+    background-color: #ffffff; 
+    color: #4CAF50; 
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px; 
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+/* Стилі для відступів всередині форми */
+#customCalculator-form {
+    margin-top: 15px;
+}
+
+/* Стилі для відступів між елементами форми і вирівнювання по лівому краю */
+#customCalculator-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left; 
+}
+
+/* Стилі для вводу та випадаючого списку */
+#customCalculator-form input,
+#customCalculator-form select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
